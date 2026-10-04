@@ -88,7 +88,7 @@ export const APP_LABEL = 'APP_LABEL'
 ~~~
 
 ~~~javascript
-import { Dependencies, Inject, Injectable } from '@nestjs/common'
+import { Dependencies, Injectable } from '@nestjs/common'
 import { APP_LABEL } from './app.constants.js'
 
 @Injectable()
@@ -135,3 +135,4 @@ Providers are singleton-scoped by default. Nest creates them for the application
 - [Providers](https://docs.nestjs.com/providers)
 - [Modules and provider scope](https://docs.nestjs.com/modules)
 - [Custom providers](https://docs.nestjs.com/fundamentals/custom-providers)
+
