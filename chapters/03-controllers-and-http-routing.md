@@ -36,7 +36,7 @@ The route prefix and method path combine. These handlers map to `GET /cats`, `GE
 
 ## Use JavaScript request bindings
 
-JavaScript does not use TypeScript-style parameter annotations. Nest provides `@Bind()` so method parameter decorators can be attached to a route handler in JavaScript:
+In JavaScript, use `@Bind()` to attach request parameter decorators to a route handler:
 
 ~~~javascript
 import { Bind, Body, Controller, Post } from '@nestjs/common'
@@ -94,3 +94,4 @@ Use one controller for a focused resource area. Keep database or business rules 
 - [Controllers](https://docs.nestjs.com/controllers)
 - [Request payloads](https://docs.nestjs.com/controllers#request-payloads)
 - [Route parameters](https://docs.nestjs.com/controllers#route-parameters)
+
