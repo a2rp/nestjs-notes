@@ -693,6 +693,18 @@ export class CatsService {
 }
 ~~~~
 
+### Example 6
+
+~~~~javascript
+async updateName(id, name) {
+  return this.catModel.updateOne(
+    { _id: id },
+    { $set: { name } },
+    { runValidators: true }
+  ).exec()
+}
+~~~~
+
 ## Logging and application lifecycle
 
 Source: [Open chapter](./13-logging-and-application-lifecycle.md)

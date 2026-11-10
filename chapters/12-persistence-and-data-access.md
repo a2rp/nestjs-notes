@@ -98,7 +98,21 @@ A lean query returns plain objects rather than full Mongoose documents. Select n
 
 ## Keep validation and persistence rules distinct
 
-A Mongoose schema validates writes made through Mongoose. It does not automatically protect writes made by every other tool or service. Validate request data at the API boundary and add database-level validation or indexes where collection-wide rules must also hold outside the application.
+A Mongoose schema validates document creation and `save()` by default. Query updates such as `updateOne()` and `findOneAndUpdate()` do not run schema validators unless `{ runValidators: true }` is set. Update validators have limits: they check supported update operators and changed paths, not the full document. Validate request data at the API boundary and add database-level validation or indexes where collection-wide rules must also hold outside the application.
+
+For a query update, choose allowed fields explicitly and turn on update validation:
+
+~~~javascript
+async updateName(id, name) {
+  return this.catModel.updateOne(
+    { _id: id },
+    { $set: { name } },
+    { runValidators: true }
+  ).exec()
+}
+~~~
+
+If the operation needs full document validation or save middleware, load the document, update it, and call `save()` instead.
 
 Avoid passing arbitrary request objects directly to a model update. Pick allowed fields explicitly so a client cannot change private properties by adding unexpected keys.
 
@@ -112,10 +126,12 @@ Avoid passing arbitrary request objects directly to a model update. Pick allowed
 6. How does `getModelToken()` help inject a model?
 7. What does `.lean()` return?
 8. Why should arbitrary request objects not be passed directly into an update?
+9. When do Mongoose query updates run schema validators?
 
 ## References
 
 - [NestJS MongoDB integration](https://docs.nestjs.com/techniques/mongodb)
 - [Mongoose schemas](https://mongoosejs.com/docs/guide.html)
+- [Mongoose validation](https://mongoosejs.com/docs/validation)
 - [Mongoose model queries](https://mongoosejs.com/docs/queries.html)
 - [NestJS database integrations](https://docs.nestjs.com/techniques/database)

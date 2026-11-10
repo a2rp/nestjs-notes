@@ -234,6 +234,8 @@ This appendix collects the review questions from the core chapters and gives a c
    **Answer:** It returns plain JavaScript objects rather than hydrated Mongoose document instances.
 8. **Question:** Why should arbitrary request objects not be passed directly into an update?  
    **Answer:** They may include fields the caller must not be allowed to change.
+9. **Question:** When do Mongoose query updates run schema validators?\
+   **Answer:** Query updates skip schema validators by default. Pass `{ runValidators: true }` to supported update methods; those validators cover only supported update operators and changed paths.
 
 ## 13. Logging and application lifecycle
 
